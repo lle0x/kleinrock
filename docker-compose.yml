@@ -28,7 +28,7 @@ services:
       - back-tier
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:6.5.2
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/

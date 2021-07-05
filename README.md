@@ -7,17 +7,17 @@ Before we get started installing the Prometheus stack. Ensure you install the la
 
 # Quick Start
 
-If on Mac run this:
+If on Linux or Mac run this:
 
 ```
-git clone https://github.com/maxandersen/internet-monitoring && cd internet-monitoring/prometheus && docker-compose up && open http://localhost:3030/d/o9mIe_Aik/internet-connection
+git clone https://github.com/lleox/kleinrock && cd kleinrock && docker-compose up && open http://localhost:3030/d/o9mIe_Aik/internet-connection
 ```
 
 otherwise:
 
 ```
-git clone https://github.com/maxandersen/internet-monitoring
-cd internet-monitoring/prometheus
+git clone https://github.com/lleox/kleinrock
+cd kleinrock
 docker-compose up
 ```
 
@@ -29,7 +29,7 @@ To change what hosts you ping you change the `targets` section in [/prometheus/p
 For speedtest the only relevant configuration is how often you want the check to happen. It is at 5 minutes by default which might be too much if you have limit on downloads. This is changed by editing `scrape_interval` under `speedtest` in [/prometheus/prometheus.yml](./prometheus/prometheus.yml).
 
 
-Once configurations are done let's start it up. From the /prometheus project directory run the following command:
+Once configurations are done let's start it up. From the / project directory run the following command:
 
     $ docker-compose up -d
 
@@ -62,5 +62,5 @@ http://localhost:9696/metrics speedtest exporter endpoint. Does take ~30 seconds
 
 Thanks to @vegasbrianc work on making a [super easy docker](https://github.com/vegasbrianc/github-monitoring) stack for running prometheus and grafana.
 
-I also want to disclaim that Prometheus aren't really (currently) intended for this kind of blackbox/external monitoring and this setup is not in anyway secured. Thus only use this for inspiration and do not blame me if someone hacks this and figure out what your real internet sped is :)
+I also want to disclaim that Prometheus aren't really (currently) intended for this kind of blackbox/external monitoring and this setup is not in anyway secured. Dear ISP, thus only use this for inspiration and do not blame me if someone hacks this and figure out what your real internet speed is :)
 

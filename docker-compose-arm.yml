@@ -76,7 +76,7 @@ services:
       - 1915
     ports:
       - 1915:1915
-    image: maxandersen/sonos_exporter
+    image: lleox/sonos_exporter:arm
     command:
       - '--address=0.0.0.0:1915'
     network_mode: host

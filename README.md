@@ -10,10 +10,16 @@ Before we get started installing the Prometheus stack. Ensure you install the la
 If on Linux or Mac run this:
 
 ```
-git clone https://github.com/lleox/kleinrock && cd kleinrock && docker-compose up && open http://localhost:3030/d/o9mIe_Aik/internet-connection
+git clone https://github.com/lleox/kleinrock && cd kleinrock && docker-compose up -d && open http://localhost:3030/d/o9mIe_Aik/internet-connection
 ```
 
-otherwise:
+If on Raspberry (or other linux arm), run this:
+
+```
+git clone https://github.com/lleox/kleinrock && cd kleinrock && docker-compose --file docker-compose-arm.yml up -d && open http://localhost:3030/d/o9mIe_Aik/internet-connection
+```
+
+If on Windows, run this:
 
 ```
 git clone https://github.com/lleox/kleinrock

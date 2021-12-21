@@ -64,7 +64,7 @@ services:
       - 9696
     ports:
       - 9696:9696
-    image: stefanwalther/speedtest-exporter
+    image: lleox/speedtest-exporter:20211221
     restart: always
     networks:
       - back-tier
@@ -79,11 +79,11 @@ services:
     image: maxandersen/sonos_exporter
     command:
       - '--address=0.0.0.0:1915'
-    network_mode: host
+ #   network_mode: host
 
   nodeexp:
     privileged: true
-    image: prom/node-exporter
+    image: prom/node-exporter:v1.2.2
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro

@@ -1,5 +1,5 @@
 
-# A Docker Stack which Monitors your home network
+# A Docker Stack which Monitors your home internet connection
 Here's a quick start to stand-up a Docker [Prometheus](http://prometheus.io/) stack containing Prometheus, Grafana with  [blackbox-exporter](https://github.com/prometheus/blackbox_exporter) and [speedtest-exporter](https://github.com/stefanwalther/speedtest-exporter) to collect and graph home network connections and speed.
 
 ## Pre-requisites
@@ -66,7 +66,7 @@ http://localhost:9696/metrics speedtest exporter endpoint. Does take ~30 seconds
 
 ## Thanks and a disclaimer
 
-Thanks to @vegasbrianc work on making a [super easy docker](https://github.com/vegasbrianc/github-monitoring) stack for running prometheus and grafana.
+Thanks to [vegasbrianc](https://github.com/vegasbrianc) and [maxandersen](https://github.com/maxandersen) work on making a super easy docker ([github-monitoring](https://github.com/vegasbrianc/github-monitoring) and [internet-monitoring](https://github.com/maxandersen/internet-monitoring)) stack for running prometheus and grafana.
 
 I also want to disclaim that Prometheus aren't really (currently) intended for this kind of blackbox/external monitoring and this setup is not in anyway secured. Dear ISP, thus only use this for inspiration and do not blame me if someone hacks this and figure out what your real internet speed is :)
 

@@ -12,89 +12,89 @@ services:
     prometheus:
         image: prom/prometheus:v2.45.0
         volumes:
-          - ./prometheus/:/etc/prometheus/
-          - prometheus_data:/prometheus
+            - ./prometheus/:/etc/prometheus/
+            - prometheus_data:/prometheus
         command:
-          - '--config.file=/etc/prometheus/prometheus.yml'
-          - '--storage.tsdb.path=/prometheus'
-          - '--web.console.libraries=/usr/share/prometheus/console_libraries'
-          - '--web.console.templates=/usr/share/prometheus/consoles'
+            - '--config.file=/etc/prometheus/prometheus.yml'
+            - '--storage.tsdb.path=/prometheus'
+            - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+            - '--web.console.templates=/usr/share/prometheus/consoles'
         ports:
-          - 9090:9090
+            - 9090:9090
         links:
-          - ping:ping
-          - speedtest:speedtest
+            - ping:ping
+            - speedtest:speedtest
         networks:
-          - back-tier
+            - back-tier
 
     grafana:
         image: grafana/grafana:10.1.2
         volumes:
-          - grafana_data:/var/lib/grafana
-          - ./grafana/provisioning/:/etc/grafana/provisioning/
+            - grafana_data:/var/lib/grafana
+            - ./grafana/provisioning/:/etc/grafana/provisioning/
         depends_on:
-          - prometheus
+            - prometheus
         ports:
-          - 3030:3000
+            - 3030:3000
         env_file:
-          - ./grafana/config.monitoring
+            - ./grafana/config.monitoring
         networks:
-          - back-tier
-          - front-tier
+            - back-tier
+            - front-tier
 
     ping:
         tty: true
         stdin_open: true
         expose:
-          - 9115
+            - 9115
         ports:
-          - 9115:9115
+            - 9115:9115
         image: prom/blackbox-exporter:v0.24.0
         volumes:
-          - ./blackbox/config:/config
+            - ./blackbox/config:/config
         command:
-          - '--config.file=/config/blackbox.yml'
+            - '--config.file=/config/blackbox.yml'
         networks:
-          - back-tier
+            - back-tier
 
     speedtest:
         tty: true
         stdin_open: true
         expose:
-          - 9696
+            - 9696
         ports:
-          - 9696:9696
+            - 9696:9696
         image: lleox/speedtest-exporter:20211221
         restart: always
         networks:
-          - back-tier
+            - back-tier
 
     sonos:
         tty: true
         stdin_open: true
         expose: 
-          - 1915
+            - 1915
         ports:
-          - 1915:1915
+            - 1915:1915
         image: maxandersen/sonos_exporter
         command:
-          - '--address=0.0.0.0:1915'
-          #   network_mode: host
+            - '--address=0.0.0.0:1915'
+            #   network_mode: host
 
     nodeexp:
         privileged: true
         image: prom/node-exporter:v1.6.1
         volumes:
-          - /proc:/host/proc:ro
-          - /sys:/host/sys:ro
-          - /:/rootfs:ro
+            - /proc:/host/proc:ro
+            - /sys:/host/sys:ro
+            - /:/rootfs:ro
         ports:
-          - 9100:9100
+            - 9100:9100
         restart: always
         command:
-          - '--path.procfs=/host/proc'
-          - '--path.sysfs=/host/sys'
-          - --collector.filesystem.ignored-mount-points
-          - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+            - '--path.procfs=/host/proc'
+            - '--path.sysfs=/host/sys'
+            - --collector.filesystem.ignored-mount-points
+            - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
         networks:
-          - back-tier
+            - back-tier

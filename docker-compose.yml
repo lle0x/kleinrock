@@ -72,7 +72,7 @@ services:
     sonos:
         tty: true
         stdin_open: true
-        expose: 
+        expose:
             - 1915
         ports:
             - 1915:1915

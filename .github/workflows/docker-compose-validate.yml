@@ -1,0 +1,52 @@
+name: Docker Compose Validation
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'docker-compose*.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'docker-compose*.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose-plugin
+
+      - name: Validate Docker Compose files
+        run: |
+          docker compose -f docker-compose.yml config > /dev/null
+          docker compose -f docker-compose-arm.yml config > /dev/null
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install yamllint
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y yamllint
+
+      - name: Create yamllint config
+        run: |
+          echo "extends: default
+          rules:
+            document-start: disable
+            line-length: disable
+            truthy: disable" > .yamllint.yml
+
+      - name: Lint Docker Compose files
+        run: |
+          yamllint -c .yamllint.yml docker-compose.yml
+          yamllint -c .yamllint.yml docker-compose-arm.yml

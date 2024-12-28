@@ -10,7 +10,7 @@ networks:
 
 services:
   prometheus:
-    image: prom/prometheus:v2.0.0
+    image: prom/prometheus:v2.45.0
     volumes:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
@@ -28,7 +28,7 @@ services:
       - back-tier
 
   grafana:
-    image: grafana/grafana:6.5.2
+    image: grafana/grafana:10.1.2
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/
@@ -49,7 +49,7 @@ services:
       - 9115
     ports:
       - 9115:9115
-    image: prom/blackbox-exporter
+    image: prom/blackbox-exporter:v0.24.0
     volumes:
       - ./blackbox/config:/config
     command:
@@ -83,7 +83,7 @@ services:
 
   nodeexp:
     privileged: true
-    image: prom/node-exporter:v1.2.2
+    image: prom/node-exporter:v1.6.1
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
@@ -98,4 +98,3 @@ services:
       - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
     networks:
       - back-tier
-

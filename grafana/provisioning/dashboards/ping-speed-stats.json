@@ -80,7 +80,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "speedtest_bits_per_second{direction=\"downstream\"}",
+          "expr": "speedtest_download_megabits_per_second",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -160,7 +160,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "speedtest_bits_per_second{direction=\"upstream\"}",
+          "expr": "speedtest_upload_megabits_per_second",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -241,7 +241,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "speedtest_ping",
+          "expr": "speedtest_ping_latency_milliseconds",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -299,11 +299,18 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "speedtest_bits_per_second{}",
+          "expr": "speedtest_download_megabits_per_second",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{direction}}",
+          "legendFormat": "download",
           "refId": "A"
+        },
+        {
+          "expr": "speedtest_upload_megabits_per_second",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "upload",
+          "refId": "B"
         }
       ],
       "thresholds": [],
